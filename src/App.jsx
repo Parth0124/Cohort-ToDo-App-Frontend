@@ -1,39 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+//create a custom hook
+
+function useTodos()
+{
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/todos", {
+      method: "GET"
+    }).then((response) => {
+      response.json().then((data) => {
+        console.log(data);
+        setTodos(data)
+      })
+    })
+
+    setInterval(() => {
+      fetch("http://localhost:3000/todos", {
+        method: "GET"
+      }).then((response) => {
+        response.json().then((data) => {
+          console.log(data);
+          setTodos(data)
+        })
+      })
+    }, 1000)
+
+  }, [])
+
+  return todos;
+}
 
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      title: "Gym",
-      description: "Go to gym from 5 to 7",
-      id: 1
-    },
-    {
-      title: "Class",
-      description: "Go to Class from 8 to 9",
-      id: 2
-    }
-  ]);
+
+  const todos = useTodos();
 
   return (
     <>
-     {todos.map((todo) => {
-      return <Todo title= {todo.title} description= {todo.description} id={todo.id} />
+     {todos.map(todo => {
+      return <div>
+        {todo.title}
+        {todo.description}
+        <button>Delete</button>
+      </div>
      })}
     </>
-  );
-}
-
-function Todo(props)
-{
-  return(
-  <>
-    {props.id}
-    )
-    {props.title} 
-    : 
-    {props.description}
-    <br />
-  </>
   );
 }
 
