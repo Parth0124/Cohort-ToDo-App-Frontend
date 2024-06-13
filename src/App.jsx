@@ -16,15 +16,24 @@ function App() {
 
   return (
     <>
-      <h1>Hi There!!</h1>
-      {todos.map(todo => (
-        <div key={todo.id}>
-          <h2>{todo.title}</h2>
-          <p>{todo.description}</p>
-          <p>{todo.id}</p>
-        </div>
-      ))}
+     {todos.map((todo) => {
+      return <Todo title= {todo.title} description= {todo.description} id={todo.id} />
+     })}
     </>
+  );
+}
+
+function Todo(props)
+{
+  return(
+  <>
+    {props.id}
+    )
+    {props.title} 
+    : 
+    {props.description}
+    <br />
+  </>
   );
 }
 
