@@ -1,51 +1,31 @@
-import { useState } from "react"
-
-// var todos = [
-// {
-//   title:"GO to gym",
-//   description: "Hit the gym and grind",
-//   id: 1
-// },
-// {
-//   title: "Go eat lunch",
-//   description: "You are hungry go eat food",
-//   id: 2
-// }]
-
+import { useState } from "react";
 
 function App() {
-  const [todo, setTodo] = useState({
-    title:"GO to gym",
-    description: "Hit the gym and grind",
-    id: 1
-})
-
-function PersonName(props)
-{
-  return(
-    <div>
-      <h1>{props.firstName} {props.lastName}</h1>
-    </div>
-  );
-}
-
-setInterval(() => {
-  setTodo({
-    title: "Workout",
-    description: "Cardio time",
-    id: 100
-  })
-}, 2000)
+  const [todos, setTodos] = useState([
+    {
+      title: "Gym",
+      description: "Go to gym from 5 to 7",
+      id: 1
+    },
+    {
+      title: "Class",
+      description: "Go to Class from 8 to 9",
+      id: 2
+    }
+  ]);
 
   return (
     <>
       <h1>Hi There!!</h1>
-      {todo.title}
-      {todo.description}
-      {todo.id}
-      <PersonName firstName={todo.title} lastName={todo.description} />
+      {todos.map(todo => (
+        <div key={todo.id}>
+          <h2>{todo.title}</h2>
+          <p>{todo.description}</p>
+          <p>{todo.id}</p>
+        </div>
+      ))}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
