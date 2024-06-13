@@ -20,6 +20,15 @@ function App() {
     id: 1
 })
 
+function PersonName(props)
+{
+  return(
+    <div>
+      <h1>{props.firstName} {props.lastName}</h1>
+    </div>
+  );
+}
+
 setInterval(() => {
   setTodo({
     title: "Workout",
@@ -34,6 +43,7 @@ setInterval(() => {
       {todo.title}
       {todo.description}
       {todo.id}
+      <PersonName firstName={todo.title} lastName={todo.description} />
     </>
   )
 }
